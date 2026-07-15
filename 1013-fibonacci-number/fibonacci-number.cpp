@@ -1,15 +1,17 @@
 class Solution {
 public:
-    unordered_map<int,int>dp;
-    int fib(int n) {
-        if( n<=1)
-        return n;
-        if(dp.find(n)!=dp.end())
+    int func(int n,vector<int>& dp){
+        if(n==0)
+        return 0;
+        if(n==1)
+        return 1;
+        if(dp[n]!=-1){
             return dp[n];
-        int a1=fib(n-1);
-        int a2=fib(n-2);
-        int ans= a1+a2;
-        dp[n]=ans;
-        return ans;
+        }
+        return dp[n]=func(n-1,dp)+func(n-2,dp);
+    }
+    int fib(int n) {
+        vector<int>dp(n+1,-1);
+        return func(n,dp);
     }
 };
