@@ -1,36 +1,16 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        vector<int> res;
-        for(int n:nums){
-            if( res.empty() || res.back()<n){
-                res.push_back(n);
-
+        vector<int> temp;
+        for(auto x:nums){
+            auto it=lower_bound(temp.begin(),temp.end(),x);
+            if(it==temp.end()){
+                temp.push_back(x);
             }
             else{
-                int idx=binarysearch(res,n);
-                res[idx]=n;
+                *it=x;
             }
         }
-
-        return res.size();
+        return temp.size();
     }
-        int binarysearch(vector<int> & nums,int target){
-            int left=0;
-            int right=nums.size()-1;
-            while(left<=right){
-                int mid=left+(right-left)/2;
-                if(nums[mid]==target){
-                return mid;
-            }
-            else if(nums[mid]>target){
-                right=mid-1;
-            }
-            else{
-                left=mid+1;
-        }
-
-        }
-        return left;
-}
 };
