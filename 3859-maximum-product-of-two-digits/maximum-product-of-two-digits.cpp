@@ -1,9 +1,39 @@
 class Solution {
 public:
     int maxProduct(int n) {
-        string s=to_string(n);
-         sort(s.rbegin() , s.rend());
-        int maxProduct = (s[0]-'0')*(s[1]-'0');
-        return maxProduct;
+        
+        int t = n ; 
+        int first = 0 ;
+
+        while(t > 0){
+            int r = t%10;
+
+            if ( r > first){
+                first = r ;
+            }
+            t = t/10;
+        }
+
+        t = n ; 
+        int sec = 0 ;
+        int count = 0 ;
+
+        while( t > 0){
+            int r = t%10;
+
+            if ( r == first)
+            count++;
+
+            if ( count > 1){
+                sec = first ;
+            }
+
+            if ( r > sec && r != first  ){
+                sec = r ;
+            } 
+            t = t/10;
+        }
+
+        return first*sec;
     }
 };
