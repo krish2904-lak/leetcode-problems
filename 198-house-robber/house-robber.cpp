@@ -1,22 +1,21 @@
 class Solution {
 public:
     int func(int n,vector<int>& nums,vector<int>& dp){
-        if(n==0)
-        return nums[n];
-        if(n<0)
+        if(n>=nums.size())
         return 0;
+
         if(dp[n]!=-1)
-        return dp[n];
+       return  dp[n];
 
-        int pick=nums[n]+func(n-2,nums,dp);
-        int notpick=0+func(n-1,nums,dp);
+       int pick=nums[n]+func(n+2,nums,dp);
+       int notpick=func(n+1,nums,dp);
 
-        return dp[n]=max(pick,notpick);
+       return dp[n]=max(pick,notpick);
     }
     int rob(vector<int>& nums) {
-        int n=nums.size()-1;
-        vector<int>dp(n+1,-1);
-        return func(n,nums,dp);
+        int n=nums.size();
+        vector<int>dp(n,-1);
+        return func(0,nums,dp);
         
     }
 };
