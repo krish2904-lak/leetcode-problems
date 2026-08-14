@@ -7,7 +7,7 @@ public:
         for(int right=0;right<nums.size();right++){
             mp[nums[right]]++;
 
-            while(mp[nums[right]]>k){
+        while(mp[nums[right]]>k){
                 mp[nums[i]]--;
                 i++;
           }
