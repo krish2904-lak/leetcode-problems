@@ -2,22 +2,17 @@ class Solution {
 public:
     int hIndex(vector<int>& citations) {
         int n=citations.size();
-        vector<int>freq(n+1,0);
-        for(int c:citations){
-            if(c>=n){
-                freq[n]++;
+        int count=0;
+        sort(citations.begin(),citations.end());
+        for(int i=n-1;i>=0;i--){
+            if(citations[i]>=n-i){
+            count=n-i;
             }
             else{
-                freq[c]++;
+                break;
             }
+
         }
-        int count=0;
-        for(int h=n;h>=0;h--){
-            count+=freq[h];
-            if(count>=h){
-                return h;
-            }
-        }
-        return 0;
+        return count;
     }
 };
